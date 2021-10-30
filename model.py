@@ -361,7 +361,7 @@ class EncoderDecoder(nn.Module):
         tmp_scores=get_cuda(torch.zeros(beam_size*beam_size), self.gpu)
         
         ys = get_cuda(torch.ones(batch_size, 1).fill_(start_id).long(), self.gpu)
-        candidate[:,:,0]= get_cuda(torch.zeros(beam_size, batch_size, max_len), self.gpu)
+        candidate[:,:,0]= ys.clone()
         #first 
         out = self.decode(latent.unsqueeze(1), to_var(ys, self.gpu), to_var(subsequent_mask(ys.size(1)).long(), self.gpu))
         prob = self.generator(out[:, -1])
