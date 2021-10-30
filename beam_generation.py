@@ -55,6 +55,7 @@ parser.add_argument('--weight', type=float, default=9)
 parser.add_argument('--mode', type=str, default='add')
 
 parser.add_argument('--if_load_from_checkpoint', type=bool)
+parser.add_argument('--model_path', type=str)
 args = parser.parse_args()
 
 device=torch.device(f"cuda:{args.gpu}" if torch.cuda.is_available() else "cpu")
@@ -120,7 +121,7 @@ if __name__ == '__main__':
                                    gpu=args.gpu,
                                    d_ff=args.transformer_ff_size), args.gpu)
 
-    ae_model.load_state_dict(torch.load('./save/yelp_ae_model_params.pkl', map_location=device))
+    ae_model.load_state_dict(torch.load(args.model_path, map_location=device))
     generation(ae_model, args)
 
     print("Done!")
