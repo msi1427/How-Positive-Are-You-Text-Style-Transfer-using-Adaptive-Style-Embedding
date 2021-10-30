@@ -48,8 +48,9 @@ parser.add_argument('--embedding_dropout', type=float, default=0.5)
 parser.add_argument('--learning_rate', type=float, default=0.001)
 parser.add_argument('--label_size', type=int, default=1)
 
-parser.add_argument('--gpu', type=int, default=2)
+parser.add_argument('--gpu', type=int, default=0)
 
+parser.add_argument('--current_save_path', type=str, default='yelp')
 parser.add_argument('--name', type=str, default='yelp')
 parser.add_argument('--load_model', type=bool)
 parser.add_argument('--load_iter', type=int)
@@ -76,6 +77,7 @@ if __name__ == '__main__':
     lm_optimizer = NoamOpt(transformer.src_embed[0].d_model, 1, 2000,
                            torch.optim.Adam(transformer.parameters(), lr=0, betas=(0.9, 0.98), eps=1e-9))
     dis_optimizer=torch.optim.Adam(dis_model.parameters(), lr=0.0001)
+    print(args.current_save_path)
     if args.load_model:
         # Load models' params from checkpoint
         transformer.load_state_dict(torch.load(args.current_save_path + '/yelp_lm_model_params.pkl'))
