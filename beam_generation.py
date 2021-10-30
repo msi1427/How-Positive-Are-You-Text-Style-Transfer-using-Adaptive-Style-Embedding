@@ -50,7 +50,7 @@ parser.add_argument('--embedding_dropout', type=float, default=0.5)
 parser.add_argument('--learning_rate', type=float, default=0.001)
 parser.add_argument('--label_size', type=int, default=1)
 
-parser.add_argument('--gpu', type=int, default=1)
+parser.add_argument('--gpu', type=int, default=0)
 parser.add_argument('--weight', type=float, default=9)
 parser.add_argument('--mode', type=str, default='add')
 
